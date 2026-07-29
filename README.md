@@ -1,11 +1,24 @@
-# 安装turtlebot仿真环境
+# 安装 turtlebot 仿真环境
+
 ```bash
 sudo apt install ros-jazzy-turtlebot4-simulator ros-jazzy-irobot-create-nodes -y
 sudo apt install ros-dev-tools
 ```
 
-# 全局环境的包
+# 安装 Gazebo 开发环境 Python 包
+
 ```bash
-sudo apt install python3-yaml
+sudo wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf.gpg] \
+  http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | \
+  sudo tee /etc/apt/sources.list.d/gazebo-stable.list
+sudo apt update
+sudo apt install -y libgz-transport14-dev python3-gz-transport14
+```
+
+# 全局环境的包
+
+```bash
+sudo apt install -y ros-${ROS_DISTRO}-tf-transformations
 
 ```

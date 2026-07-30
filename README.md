@@ -19,6 +19,16 @@ sudo apt install -y libgz-transport14-dev python3-gz-transport14
 # 全局环境的包
 
 ```bash
+sudo apt install libgz-msgs11-dev python3-gz-msgs11
 sudo apt install -y ros-${ROS_DISTRO}-tf-transformations
+```
 
+# 启动仿真地图
+
+```bash
+# GUI
+ros2 launch turtlebot4_gz_bringup turtlebot4_gz.launch.py model:=lite world:=maze
+
+# without GUI
+ros2 launch turtlebot4_gz_bringup turtlebot4_gz.launch.py model:=lite world:=maze headless:=true
 ```

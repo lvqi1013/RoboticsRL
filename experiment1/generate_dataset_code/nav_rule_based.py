@@ -18,7 +18,8 @@ import tabm
 import rtdl_num_embeddings
 import sklearn.preprocessing
 from rule_based_env import RuleBasedSubgoalGenerator
-from astar import astar
+from experiment1.common_code.astar_planner import Astar
+from experiment1.common_code.data_structure import Point
 from typing import NamedTuple, Optional
 
 class RegressionLabelStats(NamedTuple):
@@ -545,12 +546,19 @@ class TurtleBotNavEnv(gym.Env):
     def _plan_astar_subgoal(self) -> Optional[np.ndarray]:
         """Plan once at reset and return the first useful A* waypoint."""
         try:
-            planned = astar(
-                tuple(map(float, self.current_position)),
-                tuple(map(float, self.global_goal_position)),
+            astar_planner = Astar(
                 resolution=self.astar_resolution,
                 env=self,
             )
+            start_point = Point(
+                float(self.current_position[0]),
+                float(self.current_position[1])
+            )
+            goal_point = Point(
+                float(self.global_goal_position[0]),
+                float(self.global_goal_position[1])
+            )
+            planned = astar_planner.run_astar(start_point, goal_point)
         except Exception as exc:
             self._print_and_log(f"[Internal] A* planning failed: {exc}")
             return None
@@ -559,7 +567,7 @@ class TurtleBotNavEnv(gym.Env):
             self._print_and_log("[Internal] A* returned no usable path.")
             return None
 
-        sparse_path = [np.asarray(point, dtype=np.float32) for point in planned]
+        sparse_path = [np.array([point.x, point.y], dtype=np.float32) for point in planned]
         dense_path = [sparse_path[0]]
         for start, end in zip(sparse_path, sparse_path[1:]):
             segment_distance = float(np.linalg.norm(end - start))

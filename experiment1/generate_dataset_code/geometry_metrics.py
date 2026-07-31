@@ -14,7 +14,8 @@ PACKAGE_SRC = REPO_ROOT / "src" / "turtlebot4_rl"
 if str(PACKAGE_SRC) not in sys.path:
     sys.path.insert(0, str(PACKAGE_SRC))
 
-from collision import is_position_valid, point_in_obstacle  # noqa: E402
+from experiment1.common_code.collision import is_position_valid, point_in_obstacle  # noqa: E402
+from experiment1.common_code.data_structure import Point  # noqa: E402
 
 
 MAP_BOUNDS = {
@@ -44,7 +45,7 @@ def segment_is_free(
         p = start + (end - start) * (i / steps)
         if not in_bounds(p, bounds):
             return False
-        if point_in_obstacle(float(p[0]), float(p[1]), bounds=bounds):
+        if point_in_obstacle(Point(float(p[0]), float(p[1])), bounds=bounds):
             return False
     return True
 
@@ -74,8 +75,8 @@ def subgoal_geometry_metrics(
         starts, goals, y_pred, goal_dist_before, goal_dist_after
     ):
         pred_in_bounds = in_bounds(pred, bounds)
-        pred_obstacle = point_in_obstacle(float(pred[0]), float(pred[1]), bounds=bounds)
-        pred_valid = is_position_valid(float(pred[0]), float(pred[1]), bounds=bounds)
+        pred_obstacle = point_in_obstacle(Point(float(pred[0]), float(pred[1])), bounds=bounds)
+        pred_valid = is_position_valid(Point(float(pred[0]), float(pred[1])), bounds=bounds)
         seg_free = segment_is_free(start, pred, bounds)
         progress = bool(after < before and np.linalg.norm(pred - start) > 0.2)
 

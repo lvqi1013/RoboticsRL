@@ -320,18 +320,18 @@ class TurtleBotNavEnv(gym.Env):
 
     def _generate_random_positions(self):
         """生成随机起点和目标位置，确保不在障碍物内且满足最小距离要求"""
-        from collision import is_spawn_position_valid
+        from experiment1.common_code.collision import is_position_valid
         
         max_attempts = 1000
         for _ in range(max_attempts):
             start_x = round(np.random.uniform(self.map_bounds['x_min'], self.map_bounds['x_max']), 2)
             start_y = round(np.random.uniform(self.map_bounds['y_min'], self.map_bounds['y_max']), 2)
-            if not is_spawn_position_valid(start_x, start_y, bounds=self.map_bounds):
+            if not is_position_valid(Point(start_x, start_y), bounds=self.map_bounds):
                 continue
             
             goal_x = round(np.random.uniform(self.map_bounds['x_min'], self.map_bounds['x_max']), 2)
             goal_y = round(np.random.uniform(self.map_bounds['y_min'], self.map_bounds['y_max']), 2)
-            if not is_spawn_position_valid(goal_x, goal_y, bounds=self.map_bounds):
+            if not is_position_valid(Point(goal_x, goal_y), bounds=self.map_bounds):
                 continue
             
             distance = np.sqrt((goal_x - start_x)**2 + (goal_y - start_y)**2)
@@ -532,14 +532,14 @@ class TurtleBotNavEnv(gym.Env):
     def _is_position_valid(self, position: np.ndarray) -> bool:
         """Check whether a (x, y) goal position is valid in the map.
 
-        Uses turtlebot4_rl.collision.is_position_valid (obstacles + optional bounds).
+        Uses experiment1.common_code.collision.is_position_valid (obstacles + optional bounds).
         """
         try:
-            from collision import is_position_valid
+            from experiment1.common_code.collision import is_position_valid
 
             x = float(position[0])
             y = float(position[1])
-            return bool(is_position_valid(x, y, bounds=self.map_bounds))
+            return bool(is_position_valid(Point(x, y), bounds=self.map_bounds))
         except Exception:
             return False
 

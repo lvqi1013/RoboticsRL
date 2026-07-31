@@ -12,7 +12,7 @@ set -euo pipefail
 PROJECT_ROOT=$PWD
 VENV_DIR="${PROJECT_ROOT}/.venv"
 SCRIPT_PATH="${PROJECT_ROOT}/experiment1/generate_dataset_code/generate_dataset_gazebo.py"
-
+PYTHONPATH="${PROJECT_ROOT}:${PYTHONPATH:-}" 
 # 默认参数
 DEFAULT_MAP_SIZE=4
 DEFAULT_SEED=0
@@ -135,6 +135,6 @@ python "${SCRIPT_PATH}" \
     --astar-resolution "${ASTAR_RESOLUTION}" \
     --max-wait-for-observation "${MAX_WAIT}" \
     --report-every "${REPORT_EVERY}" \
-    --output-dir "${OUTPUT_DIR}"
+    --output "${OUTPUT_DIR}"
 
 echo "[DONE] Gazebo dataset written to: ${OUTPUT_DIR}"

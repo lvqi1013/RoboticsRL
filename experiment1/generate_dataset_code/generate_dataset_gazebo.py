@@ -282,6 +282,8 @@ def generate(args: argparse.Namespace) -> int:
         "ros2 launch turtlebot4_gz_bringup turtlebot4_gz.launch.py "
         "model:=lite world:=maze"
     )
+    args.output = args.output / f"subgoal_gazebo_maze_map{map_size}_seed{seed}.csv"
+
     config = DatasetConfig(
         map_size=args.map_size,
         world_name=args.world_name,
@@ -395,7 +397,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path(f"experiment1/results/dataset_from_gazebo/subgoal_gazebo_maze_map{args.map_size}_seed{args.seed}.csv"),
+        default=Path(f"experiment1/results/dataset_from_gazebo/"),
     )
     return parser
 

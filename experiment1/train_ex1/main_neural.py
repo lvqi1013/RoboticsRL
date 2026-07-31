@@ -7,19 +7,19 @@ import json
 import csv
 from dataclasses import asdict
 
-from utils import get_map_seed, feature_columns, prepare_split
+from utils import feature_columns, prepare_split
 from train_config import BASE_FEATURE_COLS, TARGET_COLS, SubgoalResult
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset", type=Path, required=True)
-    # parser.add_argument("--map-size", type=int, choices=[4, 6, 10], required=True)
+    parser.add_argument("--dataset-dir", type=Path, default=Path("experiment1/results/dataset_from_gazebo"))
+    parser.add_argument("--map-size", type=int, choices=[4, 6, 10], required=True)
     parser.add_argument(
         "--model",
         # default=["tabm", "mlp", "transformer", "lstm", "xgboost", "catboost"],
     )
-    # parser.add_argument("--seed", type=int,)
+    parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--epochs", type=int, default=180)
     parser.add_argument("--batch-size", type=int, default=256)
     parser.add_argument("--device", default="cuda:0")
@@ -79,19 +79,26 @@ def write_results(results: list[SubgoalResult], output_dir: Path, seed: int, map
 def main():
     args = build_parser().parse_args()
 
-    map_size, seed = get_map_seed(str(args.dataset))
+    map_size = args.map_size
+    seed = args.seed
+
     device = args.device
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
 
-    df = pd.read_csv(args.dataset).dropna()
+    ds_path = args.dataset_dir / f"subgoal_gazebo_maze_map{map_size}_seed{seed}.csv"
+
+    if not ds_path.exists():
+        raise FileNotFoundError(f"Dataset file not found: {ds_path}")
+
+    df = pd.read_csv(ds_path).dropna()
     cols = feature_columns(df)
     x = df[cols].to_numpy(dtype=np.float32) # 获取69维的输入数据
     y = df[TARGET_COLS].to_numpy(dtype=np.float32) # 标签数据：子目标
 
     # 保存此次运行的参数配置
     config_data = {
-        "dataset": str(args.dataset),
+        "dataset": str(ds_path),   
         "map_size": map_size,
         "model": args.model,
         "seeds": seed,

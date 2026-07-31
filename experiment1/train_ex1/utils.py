@@ -17,14 +17,6 @@ def feature_columns(df: pd.DataFrame) -> list[str]:
         raise ValueError(f"Dataset is missing columns: {missing}")
     return cols
 
-def get_map_seed(file_name: str) -> tuple[int | None, int | None]:
-    # 正则表达式捕获 map、seed 后的数字
-    res = re.search(r"map(\d+)_seed(\d+)", file_name)
-    if res:
-        map_idx = int(res.group(1))
-        seed_idx = int(res.group(2))
-        return map_idx, seed_idx
-    return None, None
 
 def prepare_split(
     x: np.ndarray,

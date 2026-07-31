@@ -23,6 +23,14 @@ sudo apt install libgz-msgs11-dev python3-gz-msgs11
 sudo apt install -y ros-${ROS_DISTRO}-tf-transformations
 ```
 
+# 配置虚拟环境
+
+```bash
+uv venv --system-site-packages --python 3.12
+source .venv/bin/activate
+uv pip install -r requirements.txt
+```
+
 # 启动仿真地图
 
 ```bash

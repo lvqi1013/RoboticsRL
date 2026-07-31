@@ -34,9 +34,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--skip-missing-optional", action="store_true")
     return parser
 
-def write_results(results: list[SubgoalResult], output_dir: Path) -> None:
-    per_seed_path = output_dir / "per_seed_metrics.csv"
-    with per_seed_path.open("w", newline="", encoding="utf-8") as f:
+def write_results(results: list[SubgoalResult], output_dir: Path, seed: int, map_size: int, model_name: str) -> None:
+    seed_path = output_dir / "ex1_metrics" / f"metrics_{model_name}_s{seed}_m{map_size}.csv"
+    seed_path.parent.mkdir(parents=True, exist_ok=True)
+    with seed_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=list(asdict(results[0]).keys()))
         writer.writeheader()
         for result in results:
@@ -56,24 +57,24 @@ def write_results(results: list[SubgoalResult], output_dir: Path) -> None:
         "progress_rate",
         "mean_progress",
     ]
-    aggregate_rows = []
-    for model in sorted({r.model for r in results}):
-        subset = [r for r in results if r.model == model]
-        row = {"model": model, "n_seeds": len(subset)}
-        for metric in metric_names:
-            values = np.array([getattr(r, metric) for r in subset], dtype=np.float64)
-            row[f"{metric}_mean"] = float(values.mean())
-            row[f"{metric}_std"] = float(values.std(ddof=0))
-        aggregate_rows.append(row)
+    # aggregate_rows = []
+    # for model in sorted({r.model for r in results}):
+    #     subset = [r for r in results if r.model == model]
+    #     row = {"model": model, "n_seeds": len(subset)}
+    #     for metric in metric_names:
+    #         values = np.array([getattr(r, metric) for r in subset], dtype=np.float64)
+    #         row[f"{metric}_mean"] = float(values.mean())
+    #         row[f"{metric}_std"] = float(values.std(ddof=0))
+    #     aggregate_rows.append(row)
 
-    aggregate_path = output_dir / "aggregate_metrics.csv"
-    with aggregate_path.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=list(aggregate_rows[0].keys()))
-        writer.writeheader()
-        writer.writerows(aggregate_rows)
+    # aggregate_path = output_dir  / "ex1_metrics" / "aggregate_metrics.csv"
+    # with aggregate_path.open("w", newline="", encoding="utf-8") as f:
+    #     writer = csv.DictWriter(f, fieldnames=list(aggregate_rows[0].keys()))
+    #     writer.writeheader()
+    #     writer.writerows(aggregate_rows)
 
-    print(f"Wrote {per_seed_path}")
-    print(f"Wrote {aggregate_path}")
+    print(f"Wrote {seed_path}")
+    # print(f"Wrote {aggregate_path}")
 
 def main():
     args = build_parser().parse_args()
@@ -144,7 +145,7 @@ def main():
 
     if not results:
         raise RuntimeError("No model results were produced.")
-    write_results(results, args.output_dir)
+    write_results(results, args.output_dir, seed=seed, map_size=map_size, model_name=model_name)
 
 
 if __name__ == '__main__':

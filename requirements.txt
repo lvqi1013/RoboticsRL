@@ -1,0 +1,7 @@
+stable-baselines3
+gymnasium
+tensorboard
+tabm
+scikit-learn
+pandas
+numpy<2

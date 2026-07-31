@@ -8,8 +8,8 @@ from pathlib import Path
 
 import numpy as np
 
-from collision import is_position_valid, point_in_obstacle  # noqa: E402
-from data_structure import Point
+from experiment1.common_code.collision import is_position_valid, point_in_obstacle  # noqa: E402
+from experiment1.common_code.data_structure import Point
 
 MAP_BOUNDS = {
     4: {"x_min": -2.0, "x_max": 2.0, "y_min": -2.0, "y_max": 2.0},

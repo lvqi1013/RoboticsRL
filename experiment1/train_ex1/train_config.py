@@ -4,7 +4,7 @@ import numpy as np
 import os
 from pathlib import Path
 
-CHEACKPOINT_OUTPUT_DIR = Path("results/checkpoint")
+CHEACKPOINT_OUTPUT_DIR = Path("experiment1/results/checkpoint")
 CHEACKPOINT_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 TARGET_COLS = ["subgoal_x", "subgoal_y"]

@@ -69,7 +69,7 @@ class Trainer:
         self.patience_left = patience
 
 
-    def run(self):
+    def run(self,preprocessing):
         for epoch in range(self.epochs):
             self.model.train()
             order = torch.randperm(len(self.x_train), device=self.device)
@@ -116,7 +116,9 @@ class Trainer:
         {
             "model": self.model_name,
             "model_state_dict": self.best_state,
+            "preprocessing": preprocessing,
             "label_stats": self.label_stats,
+            "regression_label_stats": self.label_stats,
             "feature_count": int(self.parts["train_x"].shape[1]),
             "metrics": metrics,
         },

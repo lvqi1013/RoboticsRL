@@ -148,7 +148,7 @@ def main():
             map_size=map_size,
         )
 
-        metrics, checkpoint = trainer.run()
+        metrics, checkpoint = trainer.run(preprocessing)
     results: list[SubgoalResult] = []
     results.append(
                 SubgoalResult(

@@ -41,7 +41,7 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 def write_results(results: list[SubgoalResult], output_dir: Path, seed: int, map_size: int, model_name: str) -> None:
-    seed_path = output_dir / "ex1_metrics" / f"metrics_{model_name}_s{seed}_m{map_size}.csv"
+    seed_path = output_dir / "ex1_metrics" / f"{model_name}"/f"map_size{map_size}" /f"metrics_{model_name}_s{seed}_m{map_size}.csv"
     seed_path.parent.mkdir(parents=True, exist_ok=True)
     with seed_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=list(asdict(results[0]).keys()))
@@ -90,7 +90,7 @@ def main():
     device = args.device
     args.output_dir.mkdir(parents=True, exist_ok=True)
 
-    ds_path = args.dataset_dir / f"subgoal_gazebo_maze_map{map_size}_seed{seed}.csv"
+    ds_path = args.dataset_dir / f"map_size_{map_size}" /f"subgoal_gazebo_maze_map{map_size}_seed{seed}.csv"
 
     if not ds_path.exists():
         raise FileNotFoundError(f"Dataset file not found: {ds_path}")

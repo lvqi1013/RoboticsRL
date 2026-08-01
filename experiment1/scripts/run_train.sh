@@ -22,7 +22,7 @@ DATASET_DIR="${PROJECT_ROOT}/experiment1/results/dataset_from_gazebo"
 
 # 可被环境变量覆盖的超参数
 DEVICE="${DEVICE:-cuda:0}"
-EPOCHS="${EPOCHS:-180}"
+EPOCHS="${EPOCHS:-1000}"
 BATCH_SIZE="${BATCH_SIZE:-256}"
 LR="${LR:-2e-3}"
 WEIGHT_DECAY="${WEIGHT_DECAY:-5e-5}"
@@ -107,7 +107,7 @@ fi
 # ====================== 参数校验 ======================
 # 如果没有 DATASET 变量，根据 MAP_SIZE 和 SEED 构建
 if [[ -z "${DATASET:-}" ]]; then
-    DATASET="${DATASET_DIR}/subgoal_gazebo_maze_map${MAP_SIZE}_seed${SEED}.csv"
+    DATASET="${DATASET_DIR}/map_size_${MAP_SIZE}/subgoal_gazebo_maze_map${MAP_SIZE}_seed${SEED}.csv"
 fi
 
 # 如果通过数据集路径传入，尝试从中解析 MAP_SIZE、SEED 和 DATASET_DIR

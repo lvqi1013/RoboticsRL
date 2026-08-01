@@ -111,7 +111,8 @@ class Trainer:
         test_pred = self.predict_tensor(self.x_test)
         metrics = self.base_metrics(self.parts["test_y"], test_pred, self.parts["test_x_raw"], self.map_size)
 
-        checkpoint = CHEACKPOINT_OUTPUT_DIR / f"{self.model_name}_seed{self.seed}.pt"
+        checkpoint = CHEACKPOINT_OUTPUT_DIR / f"map_size_{self.map_size}" /f"{self.model_name}_seed{self.seed}.pt"
+        checkpoint.parent.mkdir(parents=True, exist_ok=True)
         torch.save(
         {
             "model": self.model_name,

@@ -61,7 +61,7 @@ Usage: $(basename "$0") [MODEL] [MAP_SIZE] [SEED]
   交互式: 不传参数时，会依次询问 模型、地图大小、seed
   命令行: 按顺序传入 模型、地图大小、seed
 
-  MODEL     可选: mlp | lstm | transformer | tabm   (默认: ${DEFAULT_MODEL})
+  MODEL     可选: mlp | lstm | transformer | tabm  | xgboost | catboost (默认: ${DEFAULT_MODEL})
   MAP_SIZE  可选: 4 | 6 | 10                        (默认: ${DEFAULT_MAP_SIZE})
   SEED      整数                                    (默认: ${DEFAULT_SEED})
 
@@ -77,7 +77,7 @@ esac
 # 解析命令行参数或交互输入
 if [[ $# -eq 0 ]]; then
     # 交互式模式
-    prompt_input "请输入模型 (mlp/lstm/transformer/tabm)" "${DEFAULT_MODEL}" "MODEL"
+    prompt_input "请输入模型 (mlp/lstm/transformer/tabm/xgboost/catboost)" "${DEFAULT_MODEL}" "MODEL"
     prompt_input "请输入地图大小 (4/6/10)" "${DEFAULT_MAP_SIZE}" "MAP_SIZE"
     prompt_input "请输入 seed" "${DEFAULT_SEED}" "SEED"
 elif [[ $# -eq 1 ]]; then
@@ -128,7 +128,7 @@ MAP_SIZE="${MAP_SIZE:-${DEFAULT_MAP_SIZE}}"
 SEED="${SEED:-${DEFAULT_SEED}}"
 
 case "${MODEL}" in
-    mlp|lstm|transformer|tabm) ;;
+    mlp|lstm|transformer|tabm|xgboost|catboost) ;;
     -h|--help) usage; exit 0 ;;
     *) echo "[ERROR] 不支持的模型: ${MODEL}"; usage; exit 1 ;;
 esac
@@ -171,7 +171,7 @@ echo " OutputDir   : ${OUTPUT_DIR}"
 echo "============================================================"
 
 PYTHONPATH="${PROJECT_ROOT}:${SCRIPT_DIR}:${PYTHONPATH:-}" \
-python "${SCRIPT_DIR}/main_neural.py" \
+python "${SCRIPT_DIR}/main_train.py" \
     --dataset-dir "${DATASET_DIR}" \
     --map-size "${MAP_SIZE}" \
     --seed "${SEED}" \

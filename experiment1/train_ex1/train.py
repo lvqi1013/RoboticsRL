@@ -7,6 +7,7 @@ from copy import deepcopy
 import math
 from torch import Tensor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from pathlib import Path
 
 from train_config import RegressionLabelStats, CHEACKPOINT_OUTPUT_DIR
 from models.lstm import LSTMRegressor
@@ -176,3 +177,23 @@ class Trainer:
             torch.cuda.manual_seed_all(seed)
         torch.backends.cudnn.deterministic = True
         torch.backends.cudnn.benchmark = False
+
+def base_metrics(
+        y_true: np.ndarray,
+        y_pred: np.ndarray,
+        features: np.ndarray,
+        map_size: int,
+    )-> dict[str, float]:
+        mse = float(mean_squared_error(y_true, y_pred))
+        rmse = float(math.sqrt(mse))
+        mae = float(mean_absolute_error(y_true, y_pred))
+        r2 = float(r2_score(y_true, y_pred))
+
+        metrics = {
+        "mse": mse,
+        "rmse": rmse,
+        "mae": mae,
+        "r2": r2,
+        }
+        metrics.update(subgoal_geometry_metrics(features, y_true, y_pred, map_size))
+        return metrics

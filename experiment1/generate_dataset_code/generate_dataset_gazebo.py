@@ -390,7 +390,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--min-distance", type=float, default=None)
     parser.add_argument("--astar-resolution", type=float, default=0.10)
     parser.add_argument("--max-wait-for-observation", type=float, default=10.0)
-    parser.add_argument("--max-attempts", type=int, default=200000)
+    parser.add_argument("--max-attempts", type=int, default=300000)
     parser.add_argument("--report-every", type=int, default=100)
     parser.add_argument("--positions-file", default=None)
     parser.add_argument("--resume", action="store_true")

@@ -4,4 +4,6 @@ tensorboard
 tabm
 scikit-learn
 pandas
+xgboost
+catboost
 numpy<2

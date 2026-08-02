@@ -198,7 +198,7 @@ class TurtleBotNavEnv(gym.Env):
         self.subgoal_model = None
         self.subgoal_preprocessing = None
         self.subgoal_label_stats = None
-        self.device = torch.device('cpu')
+        self.device = torch.device('cuda:0')
         self.global_goal_position = None  # 真正的全局终点
         self.current_goal = None  # RL 智能体看到的"当前目标"（可能是子目标或全局终点）
         self.using_subgoal = False  # 当前是否在追踪子目标

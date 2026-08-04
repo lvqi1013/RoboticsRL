@@ -33,7 +33,10 @@ def merge_all_seeds(model_name: str, map_size: int):
     # 除了seed列的数据，其他列均保留四位小数
     df = df.round(4)
 
-    df.to_csv(METRICS_DIR / f"{model_name}" / f"{model_name}_map_size{map_size}.csv", index=False)
+    csv_path = METRICS_DIR / f"{model_name}" / "summarize" / f"{model_name}_map_size{map_size}.csv"
+    csv_path.parent.mkdir(parents=True, exist_ok=True)
+
+    df.to_csv(csv_path, index=False)
 
 if __name__ == "__main__":
     for model_name in ['mlp', 'lstm', 'transformer', 'tabm', 'xgboost', 'catboost']:

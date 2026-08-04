@@ -10,7 +10,7 @@ from config import METRICS_DIR
 def cal_mean_std(model_name: str, map_size: int) -> None:
     """计算数据集的均值和标准差并汇总所有模型的"""
     ex1_metrics_model_dir = METRICS_DIR / model_name
-    merged_file_path = ex1_metrics_model_dir / f"{model_name}_map_size{map_size}.csv"
+    merged_file_path = ex1_metrics_model_dir / "summarize" / f"{model_name}_map_size{map_size}.csv"
     
     # 读取CSV文件
     df = pd.read_csv(merged_file_path)
@@ -33,10 +33,11 @@ def cal_mean_std(model_name: str, map_size: int) -> None:
         [df, mean_row.to_frame().T, std_row.to_frame().T],
         ignore_index=True
     )
-    result_df_path = ex1_metrics_model_dir / f"{model_name}_map_size{map_size}.xlsx"
+    result_df_path = ex1_metrics_model_dir / "summarize" / f"ms_{model_name}_map_size{map_size}.csv"
+    result_df_path.parent.mkdir(parents=True, exist_ok=True)
     
     # 保存结果到Excel文件
-    result_df.to_excel(result_df_path, index=False)
+    result_df.to_csv(result_df_path, index=False)
     
 
 

@@ -40,7 +40,7 @@ def train_xgboost(
     pred_norm = np.column_stack([m.predict(parts["test_x"]) for m in models])
     pred = pred_norm * label_stats.std + label_stats.mean
     metrics = base_metrics(parts["test_y"], pred, parts["test_x_raw"], args.map_size)
-    checkpoint = output_dir / f"xgboost_seed{seed}.joblib"
+    checkpoint = output_dir / f"map_size_{map_size}" /f"xgboost_seed{seed}.joblib"
     joblib.dump(
         {
             "models": models,
@@ -83,7 +83,7 @@ def train_catboost(
     pred_norm = np.asarray(model.predict(parts["test_x"]), dtype=np.float32)
     pred = pred_norm * label_stats.std + label_stats.mean
     metrics = base_metrics(parts["test_y"], pred, parts["test_x_raw"], args.map_size)
-    checkpoint = output_dir / f"catboost_seed{seed}.joblib"
+    checkpoint = output_dir / f"map_size_{map_size}" / f"catboost_seed{seed}.joblib"
     joblib.dump(
         {
             "model": model,

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TurtleBot4-Lite Navigation — Experiment Results</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ========== 页面头部 ========== -->
+    <header class="page-header">
+        <div class="header-inner">
+            <div class="logo-area">
+                <div class="logo-icon">&#9873;</div>
+                <div>
+                    <div class="page-title">TurtleBot4-Lite Navigation</div>
+                    <div class="page-subtitle">Reinforcement Learning Experiment Results</div>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="#ex1-results" class="nav-link active">Ex1 结果</a>
+                <a href="#ex2-results" class="nav-link">Ex2 结果</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 主内容区 ========== -->
+    <main class="main-content">
+
+        <!-- ===== Ex1 结果 ===== -->
+        <section class="section" id="ex1-results">
+            <div class="section-header">
+                <span class="section-number">1</span>
+                <div>
+                    <h1 class="section-title">Experiment 1 — 子目标预测</h1>
+                    <span class="section-subtitle">不同模型在不同地图尺寸下的预测性能对比</span>
+                </div>
+            </div>
+
+            <!-- 指标说明 -->
+            <div class="metrics-legend">
+                <span class="metric-tag"><span class="metric-abbr">MSE</span> 均方误差</span>
+                <span class="metric-tag"><span class="metric-abbr">RMSE</span> 均方根误差</span>
+                <span class="metric-tag"><span class="metric-abbr">MAE</span> 平均绝对误差</span>
+                <span class="metric-tag"><span class="metric-abbr">R²</span> 决定系数</span>
+                <span class="metric-tag"><span class="metric-abbr">MDE</span> 最大距离误差</span>
+                <span class="metric-tag"><span class="metric-abbr">Median DE</span> 中位距离误差</span>
+                <span class="metric-tag"><span class="metric-abbr">In-Bounds</span> 可通行区域比例</span>
+                <span class="metric-tag"><span class="metric-abbr">Valid SG</span> 有效子目标比例</span>
+                <span class="metric-tag"><span class="metric-abbr">Obs Hit</span> 障碍物碰撞率</span>
+                <span class="metric-tag"><span class="metric-abbr">Reach Seg</span> 可到达段比例</span>
+                <span class="metric-tag"><span class="metric-abbr">Progress</span> 进度比例</span>
+                <span class="metric-tag"><span class="metric-abbr">Mean Prog</span> 平均进度</span>
+            </div>
+
+            <!-- MapSize 4 -->
+            <div class="card" data-method="mlp">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        Map Size 4
+                        <span class="card-badge badge-blue">MLP</span>
+                    </h2>
+                    <span style="font-size:0.8rem;color:var(--text-muted)">5 seeds evaluated</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table auto-highlight">
+                        <thead>
+                            <tr>
+                                <th>Seed</th>
+                                <th>MSE ↓</th>
+                                <th>RMSE ↓</th>
+                                <th>MAE ↓</th>
+                                <th>R² ↑</th>
+                                <th>MDE ↓</th>
+                                <th>Median DE ↓</th>
+                                <th>In-Bounds ↑</th>
+                                <th>Valid SG ↑</th>
+                                <th>Obs Hit ↓</th>
+                                <th>Reach Seg ↑</th>
+                                <th>Progress ↑</th>
+                                <th>Mean Prog ↑</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- MapSize 6 -->
+            <div class="card" data-method="mlp">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        Map Size 6
+                        <span class="card-badge badge-blue">MLP</span>
+                    </h2>
+                    <span style="font-size:0.8rem;color:var(--text-muted)">5 seeds evaluated</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table auto-highlight">
+                        <thead>
+                            <tr>
+                                <th>Seed</th>
+                                <th>MSE ↓</th>
+                                <th>RMSE ↓</th>
+                                <th>MAE ↓</th>
+                                <th>R² ↑</th>
+                                <th>MDE ↓</th>
+                                <th>Median DE ↓</th>
+                                <th>In-Bounds ↑</th>
+                                <th>Valid SG ↑</th>
+                                <th>Obs Hit ↓</th>
+                                <th>Reach Seg ↑</th>
+                                <th>Progress ↑</th>
+                                <th>Mean Prog ↑</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="13" style="text-align:center;color:var(--text-muted);padding:2rem;">
+                                    &#128218; 数据待补充 — 请将 MapSize 6 的实验结果填入此处
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- MapSize 10 -->
+            <div class="card" data-method="mlp">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        Map Size 10
+                        <span class="card-badge badge-blue">MLP</span>
+                    </h2>
+                    <span style="font-size:0.8rem;color:var(--text-muted)">5 seeds evaluated</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table auto-highlight">
+                        <thead>
+                            <tr>
+                                <th>Seed</th>
+                                <th>MSE ↓</th>
+                                <th>RMSE ↓</th>
+                                <th>MAE ↓</th>
+                                <th>R² ↑</th>
+                                <th>MDE ↓</th>
+                                <th>Median DE ↓</th>
+                                <th>In-Bounds ↑</th>
+                                <th>Valid SG ↑</th>
+                                <th>Obs Hit ↓</th>
+                                <th>Reach Seg ↑</th>
+                                <th>Progress ↑</th>
+                                <th>Mean Prog ↑</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0</td>
+                                <td>0.0041</td>
+                                <td>0.0641</td>
+                                <td>0.0302</td>
+                                <td>0.9966</td>
+                                <td>0.0472</td>
+                                <td>0.0341</td>
+                                <td>1.0000</td>
+                                <td>0.9852</td>
+                                <td>0.0017</td>
+                                <td>0.9975</td>
+                                <td>1.0000</td>
+                                <td>1.6448</td>
+                            </tr>
+                            <tr>
+                                <td>42</td>
+                                <td>0.0632</td>
+                                <td>0.2514</td>
+                                <td>0.1532</td>
+                                <td>0.9865</td>
+                                <td>0.2399</td>
+                                <td>0.1700</td>
+                                <td>0.9999</td>
+                                <td>0.8189</td>
+                                <td>0.0303</td>
+                                <td>0.9301</td>
+                                <td>0.9996</td>
+                                <td>1.8576</td>
+                            </tr>
+                            <tr>
+                                <td>100</td>
+                                <td>0.0672</td>
+                                <td>0.2592</td>
+                                <td>0.1604</td>
+                                <td>0.9858</td>
+                                <td>0.2519</td>
+                                <td>0.1808</td>
+                                <td>0.9997</td>
+                                <td>0.8327</td>
+                                <td>0.0276</td>
+                                <td>0.9348</td>
+                                <td>0.9993</td>
+                                <td>1.8183</td>
+                            </tr>
+                            <tr>
+                                <td>1013</td>
+                                <td>0.0709</td>
+                                <td>0.2663</td>
+                                <td>0.1683</td>
+                                <td>0.9850</td>
+                                <td>0.2637</td>
+                                <td>0.1885</td>
+                                <td>0.9977</td>
+                                <td>0.7868</td>
+                                <td>0.0345</td>
+                                <td>0.9197</td>
+                                <td>1.0000</td>
+                                <td>1.8545</td>
+                            </tr>
+                            <tr>
+                                <td>2026</td>
+                                <td>0.0652</td>
+                                <td>0.2553</td>
+                                <td>0.1623</td>
+                                <td>0.9861</td>
+                                <td>0.2534</td>
+                                <td>0.1836</td>
+                                <td>1.0000</td>
+                                <td>0.8003</td>
+                                <td>0.0327</td>
+                                <td>0.9271</td>
+                                <td>0.9994</td>
+                                <td>1.8198</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 汇总对比统计 -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        地图尺寸对比汇总
+                        <span class="card-badge badge-green">Summary</span>
+                    </h2>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">0.9966</div>
+                        <div class="stat-label">最佳 R² (MapSize 4, Seed 0)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">1.0000</div>
+                        <div class="stat-label">最高 In-Bounds Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">0.0017</div>
+                        <div class="stat-label">最低 Obstacle Hit Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">0.9852</div>
+                        <div class="stat-label">最高 Valid Subgoal Rate</div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ===== Ex2 结果 ===== -->
+        <section class="section" id="ex2-results">
+            <div class="section-header">
+                <span class="section-number">2</span>
+                <div>
+                    <h1 class="section-title">Experiment 2 — 强化学习导航</h1>
+                    <span class="section-subtitle">不同预测器 + SAC 在迷宫环境中的导航性能</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        Navigation Performance
+                        <span class="card-badge badge-orange">Coming Soon</span>
+                    </h2>
+                </div>
+                <div style="text-align:center;padding:2rem;color:var(--text-muted);">
+                    &#128736; Experiment 2 结果将在此展示 — 包含 Success Rate、Collision Rate、Path Length、Navigation Time 等指标
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========== 页脚 ========== -->
+    <footer class="page-footer">
+        <p>TurtleBot4-Lite Navigation &middot; Robotics RL &middot; Experiment Results</p>
+        <p style="margin-top:4px;">Generated on August 4, 2026</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

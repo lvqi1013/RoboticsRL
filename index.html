@@ -243,6 +243,8 @@
                     </table>
                 </div>
             </div>
+
+            <!-- MapSize 10 - MLP -->
             <div class="card" data-method="mlp">
                 <div class="card-header">
                     <h2 class="card-title">
@@ -455,6 +457,45 @@
                                 <td>0.9990</td>
                                 <td>1.8332</td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- MapSize 10 - Transformer -->
+            <div class="card" data-method="transformer">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        Map Size 10
+                        <span class="card-badge badge-orange">Transformer</span>
+                    </h2>
+                    <span style="font-size:0.8rem;color:var(--text-muted)">5 seeds evaluated</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table auto-highlight">
+                        <thead>
+                            <tr>
+                                <th>Seed</th>
+                                <th>MSE ↓</th>
+                                <th>RMSE ↓</th>
+                                <th>MAE ↓</th>
+                                <th>R² ↑</th>
+                                <th>MDE ↓</th>
+                                <th>Median DE ↓</th>
+                                <th>In-Bounds ↑</th>
+                                <th>Valid SG ↑</th>
+                                <th>Obs Hit ↓</th>
+                                <th>Reach Seg ↑</th>
+                                <th>Progress ↑</th>
+                                <th>Mean Prog ↑</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>0</td><td>0.0298</td><td>0.1727</td><td>0.0593</td><td>0.9747</td><td>0.0940</td><td>0.0300</td><td>1.0000</td><td>0.9788</td><td>0.0054</td><td>0.9919</td><td>0.9964</td><td>1.6167</td></tr>
+                            <tr><td>42</td><td>0.0616</td><td>0.2482</td><td>0.1426</td><td>0.9868</td><td>0.2229</td><td>0.1517</td><td>0.9999</td><td>0.8744</td><td>0.0140</td><td>0.9616</td><td>0.9992</td><td>1.8289</td></tr>
+                            <tr><td>100</td><td>0.0954</td><td>0.3088</td><td>0.1726</td><td>0.9795</td><td>0.2705</td><td>0.1769</td><td>1.0000</td><td>0.8417</td><td>0.0249</td><td>0.9335</td><td>0.9992</td><td>1.8620</td></tr>
+                            <tr><td>1013</td><td>0.0761</td><td>0.2759</td><td>0.1613</td><td>0.9836</td><td>0.2523</td><td>0.1724</td><td>1.0000</td><td>0.8629</td><td>0.0244</td><td>0.9471</td><td>0.9993</td><td>1.8648</td></tr>
+                            <tr><td>2026</td><td>0.1307</td><td>0.3615</td><td>0.2276</td><td>0.9718</td><td>0.3584</td><td>0.2505</td><td>1.0000</td><td>0.8103</td><td>0.0438</td><td>0.9010</td><td>1.0000</td><td>1.9354</td></tr>
                         </tbody>
                     </table>
                 </div>

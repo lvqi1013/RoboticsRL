@@ -15,10 +15,10 @@ def cal_mean_std(model_name: str, map_size: int) -> None:
     # 读取CSV文件
     df = pd.read_csv(merged_file_path)
     
-    # 计算均值和标准差
-    mean_values = df.mean()
-    std_values = df.std()
-    
+    # 计算均值和标准差（保留四位小数）
+    mean_values = df.mean().round(6)
+    std_values = df.std().round(6)
+
     # print(f"Mean values: {mean_values}")
     # print(f"Std values: {std_values}")
 
@@ -43,4 +43,6 @@ def cal_mean_std(model_name: str, map_size: int) -> None:
 
 
 if __name__ == "__main__":
-    cal_mean_std("catboost", 10)
+    for model_name in ['mlp', 'lstm', 'transformer', 'tabm', 'xgboost', 'catboost']:
+        for map_size in [4, 6, 10]:
+            cal_mean_std(model_name, map_size)

@@ -40,4 +40,5 @@ def merge_all_seeds(model_name: str, map_size: int):
 
 if __name__ == "__main__":
     for model_name in ['mlp', 'lstm', 'transformer', 'tabm', 'xgboost', 'catboost']:
-        merge_all_seeds(model_name, 10)
+        for map_size in [4, 6, 10]:
+            merge_all_seeds(model_name, map_size)

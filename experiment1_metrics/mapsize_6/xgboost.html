@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TurtleBot4-Lite Navigation — Experiment Results</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+    <!-- ========== 页面头部 ========== -->
+    <header class="page-header">
+        <div class="header-inner">
+            <div class="logo-area">
+                <div class="logo-icon">&#9873;</div>
+                <div>
+                    <div class="page-title">TurtleBot4-Lite Navigation</div>
+                    <div class="page-subtitle">Reinforcement Learning Experiment Results</div>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="nav-dropdown">
+                    <a href="../../index.html#ex1-results" class="nav-link">Ex1 结果</a>
+                    <div class="dropdown-content">
+                        <a href="../mapsize_4/mlp.html">Map Size 4</a>
+                        <a href="../mapsize_6/mlp.html">Map Size 6</a>
+                        <a href="../mapsize_10/mlp.html">Map Size 10</a>
+                    </div>
+                </div>
+                <a href="../../index.html#ex2-results" class="nav-link">Ex2 结果</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 主内容区 ========== -->
+    <main class="main-content">
+
+        <!-- ===== Ex1 结果 ===== -->
+        <section class="section" id="ex1-results">
+            <div class="section-header">
+                <span class="section-number">1</span>
+                <div>
+                    <h1 class="section-title">Experiment 1 — 子目标预测</h1>
+                    <span class="section-subtitle">不同模型在不同地图尺寸下的预测性能对比</span>
+                </div>
+            </div>
+
+            <!-- 指标说明 -->
+            <div class="metrics-legend">
+                <span class="metric-tag"><span class="metric-abbr">MSE</span> 均方误差</span>
+                <span class="metric-tag"><span class="metric-abbr">RMSE</span> 均方根误差</span>
+                <span class="metric-tag"><span class="metric-abbr">MAE</span> 平均绝对误差</span>
+                <span class="metric-tag"><span class="metric-abbr">R²</span> 决定系数</span>
+                <span class="metric-tag"><span class="metric-abbr">MDE</span> 最大距离误差</span>
+                <span class="metric-tag"><span class="metric-abbr">Median DE</span> 中位距离误差</span>
+                <span class="metric-tag"><span class="metric-abbr">In-Bounds</span> 可通行区域比例</span>
+                <span class="metric-tag"><span class="metric-abbr">Valid SG</span> 有效子目标比例</span>
+                <span class="metric-tag"><span class="metric-abbr">Obs Hit</span> 障碍物碰撞率</span>
+                <span class="metric-tag"><span class="metric-abbr">Reach Seg</span> 可到达段比例</span>
+                <span class="metric-tag"><span class="metric-abbr">Progress</span> 进度比例</span>
+                <span class="metric-tag"><span class="metric-abbr">Mean Prog</span> 平均进度</span>
+            </div>
+
+            <div class="sub-nav" style="margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                <a href="../../index.html" style="color: var(--accent); text-decoration: none; font-weight: 600;">&larr; Back to Index</a>
+                <span style="color: var(--text-muted);">|</span>
+                <span style="color: var(--text-primary); font-weight: 600;">Map Size 6</span>
+                <span style="color: var(--text-muted);">|</span>
+                <span style="color: var(--accent); font-weight: 600;">XGBoost</span>
+            </div>
+            <div class="model-switcher" style="margin-bottom: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;">
+                <span style="font-size: 0.78rem; color: var(--text-muted); margin-right: 0.2rem;">Models:</span>
+                <a href="mlp.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">MLP</a>
+                <a href="tabm.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">TabM</a>
+                <a href="lstm.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">LSTM</a>
+                <a href="transformer.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">Transformer</a>
+                <span style="background: var(--accent); color: #fff; padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; font-weight: 600;">XGBoost</span>
+                <a href="catboost.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">CatBoost</a>
+                <a href="summary.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">Summary</a>
+            </div>
+            <div class="size-switcher" style="margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;">
+                <span style="font-size: 0.78rem; color: var(--text-muted); margin-right: 0.2rem;">Map Size:</span>
+                <a href="../mapsize_4/xgboost.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">Map Size 4</a>
+                <span style="background: var(--success); color: #fff; padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; font-weight: 600;">Map Size 6</span>
+                <a href="../mapsize_10/xgboost.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">Map Size 10</a>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        Map Size 6
+                        <span class="card-badge" style="background:#f3e8ff;color:#8e44ad;">XGBoost</span>
+                    </h2>
+                    <span style="font-size:0.8rem;color:var(--text-muted)">5 seeds evaluated</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table auto-highlight">
+                        <thead>
+                            <tr>
+                                <th>Seed</th>
+                                <th>MSE ↓</th>
+                                <th>RMSE ↓</th>
+                                <th>MAE ↓</th>
+                                <th>R² ↑</th>
+                                <th>MDE ↓</th>
+                                <th>Median DE ↓</th>
+                                <th>In-Bounds ↑</th>
+                                <th>Valid SG ↑</th>
+                                <th>Obs Hit ↓</th>
+                                <th>Reach Seg ↑</th>
+                                <th>Progress ↑</th>
+                                <th>Mean Prog ↑</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0</td>
+                                <td>0.0112</td>
+                                <td>0.1056</td>
+                                <td>0.0671</td>
+                                <td>0.9836</td>
+                                <td>0.1037</td>
+                                <td>0.0682</td>
+                                <td>1.0000</td>
+                                <td>0.9071</td>
+                                <td>0.0024</td>
+                                <td>0.9680</td>
+                                <td>1.0000</td>
+                                <td>1.9493</td>
+                            </tr>
+                            <tr>
+                                <td>100</td>
+                                <td>0.0113</td>
+                                <td>0.1064</td>
+                                <td>0.0675</td>
+                                <td>0.9836</td>
+                                <td>0.1043</td>
+                                <td>0.0691</td>
+                                <td>1.0000</td>
+                                <td>0.9100</td>
+                                <td>0.0021</td>
+                                <td>0.9688</td>
+                                <td>1.0000</td>
+                                <td>1.9486</td>
+                            </tr>
+                            <tr>
+                                <td>1013</td>
+                                <td>0.0108</td>
+                                <td>0.1042</td>
+                                <td>0.0653</td>
+                                <td>0.9842</td>
+                                <td>0.1009</td>
+                                <td>0.0664</td>
+                                <td>1.0000</td>
+                                <td>0.9092</td>
+                                <td>0.0027</td>
+                                <td>0.9698</td>
+                                <td>1.0000</td>
+                                <td>1.9503</td>
+                            </tr>
+                            <tr>
+                                <td>2026</td>
+                                <td>0.0111</td>
+                                <td>0.1056</td>
+                                <td>0.0672</td>
+                                <td>0.9836</td>
+                                <td>0.1040</td>
+                                <td>0.0689</td>
+                                <td>1.0000</td>
+                                <td>0.9094</td>
+                                <td>0.0022</td>
+                                <td>0.9681</td>
+                                <td>1.0000</td>
+                                <td>1.9493</td>
+                            </tr>
+                            <tr>
+                                <td>42</td>
+                                <td>0.0110</td>
+                                <td>0.1051</td>
+                                <td>0.0673</td>
+                                <td>0.9839</td>
+                                <td>0.1039</td>
+                                <td>0.0697</td>
+                                <td>1.0000</td>
+                                <td>0.9099</td>
+                                <td>0.0024</td>
+                                <td>0.9686</td>
+                                <td>1.0000</td>
+                                <td>1.9501</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        Map Size 6
+                        <span class="card-badge" style="background:#f3e8ff;color:#8e44ad;">XGBoost</span>
+                    </h2>
+                    <span style="font-size:0.8rem;color:var(--text-muted)">Summary Statistics</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table stat-table">
+                        <thead>
+                            <tr>
+                                <th>Stat</th>
+                                <th>MSE ↓</th>
+                                <th>RMSE ↓</th>
+                                <th>MAE ↓</th>
+                                <th>R² ↑</th>
+                                <th>MDE ↓</th>
+                                <th>Median DE ↓</th>
+                                <th>In-Bounds ↑</th>
+                                <th>Valid SG ↑</th>
+                                <th>Obs Hit ↓</th>
+                                <th>Reach Seg ↑</th>
+                                <th>Progress ↑</th>
+                                <th>Mean Prog ↑</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mean</td>
+                                <td>0.0111</td>
+                                <td>0.1054</td>
+                                <td>0.0669</td>
+                                <td>0.9838</td>
+                                <td>0.1034</td>
+                                <td>0.0685</td>
+                                <td>1.0000</td>
+                                <td>0.9091</td>
+                                <td>0.0023</td>
+                                <td>0.9687</td>
+                                <td>1.0000</td>
+                                <td>1.9495</td>
+                            </tr>
+                            <tr>
+                                <td>Std</td>
+                                <td>0.0002</td>
+                                <td>0.0007</td>
+                                <td>0.0008</td>
+                                <td>0.0002</td>
+                                <td>0.0012</td>
+                                <td>0.0011</td>
+                                <td>0.0000</td>
+                                <td>0.0011</td>
+                                <td>0.0002</td>
+                                <td>0.0007</td>
+                                <td>0.0000</td>
+                                <td>0.0006</td>
+                            </tr>
+                            <tr>
+                                <td>Min</td>
+                                <td>0.0108</td>
+                                <td>0.1042</td>
+                                <td>0.0653</td>
+                                <td>0.9836</td>
+                                <td>0.1009</td>
+                                <td>0.0664</td>
+                                <td>1.0000</td>
+                                <td>0.9071</td>
+                                <td>0.0021</td>
+                                <td>0.9680</td>
+                                <td>1.0000</td>
+                                <td>1.9486</td>
+                            </tr>
+                            <tr>
+                                <td>Max</td>
+                                <td>0.0113</td>
+                                <td>0.1064</td>
+                                <td>0.0675</td>
+                                <td>0.9842</td>
+                                <td>0.1043</td>
+                                <td>0.0697</td>
+                                <td>1.0000</td>
+                                <td>0.9100</td>
+                                <td>0.0027</td>
+                                <td>0.9698</td>
+                                <td>1.0000</td>
+                                <td>1.9503</td>
+                            </tr>
+                            <tr style="font-weight:600;background:var(--accent-light);">
+                                <td>Mean ± Std</td>
+                                <td>0.0111 ± 0.0002</td>
+                                <td>0.1054 ± 0.0007</td>
+                                <td>0.0669 ± 0.0008</td>
+                                <td>0.9838 ± 0.0002</td>
+                                <td>0.1034 ± 0.0012</td>
+                                <td>0.0685 ± 0.0011</td>
+                                <td>1.0000 ± 0.0000</td>
+                                <td>0.9091 ± 0.0011</td>
+                                <td>0.0023 ± 0.0002</td>
+                                <td>0.9687 ± 0.0007</td>
+                                <td>1.0000 ± 0.0000</td>
+                                <td>1.9495 ± 0.0006</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ========== 页脚 ========== -->
+    <footer class="page-footer">
+        <p>TurtleBot4-Lite Navigation &middot; Robotics RL &middot; Experiment Results</p>
+        <p style="margin-top:4px;">Generated on August 4, 2026</p>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

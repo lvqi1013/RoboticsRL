@@ -82,13 +82,15 @@ function initTableHighlights() {
 
             if (values.length < 2) continue;
 
-            // 判断该列是否为"越大越好"的指标
+            // 判断该列是否为"越大越好"的指标（通过 ↑ / ↓ 箭头判断）
             const headerCell = table.querySelector(`thead th:nth-child(${col + 1})`);
-            const headerText = headerCell ? headerCell.textContent.toLowerCase() : '';
-            const higherBetter = ['r2', 'in_bounds_rate', 'valid_subgoal_rate',
-                'reachable_segment_rate', 'progress_rate', 'mean_progress',
-                'success_rate', 'accuracy', 'precision', 'recall', 'f1'
-            ].some(k => headerText.includes(k));
+            const headerText = headerCell ? headerCell.textContent.trim() : '';
+            // ↑ 箭头 = 越大越好，↓ 箭头 = 越小越好；无箭头则按关键词兜底
+            const higherBetter = headerText.includes('↑') ? true
+                : headerText.includes('↓') ? false
+                : ['r²', 'r2', 'in-bounds', 'valid sg', 'reach seg', 'progress',
+                   'mean prog', 'success', 'accuracy', 'precision', 'recall', 'f1'
+                ].some(k => headerText.toLowerCase().includes(k));
 
             // 排序
             values.sort((a, b) => a.val - b.val);

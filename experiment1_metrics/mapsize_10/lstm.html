@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TurtleBot4-Lite Navigation — Experiment Results</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+
+    <!-- ========== 页面头部 ========== -->
+    <header class="page-header">
+        <div class="header-inner">
+            <div class="logo-area">
+                <div class="logo-icon">&#9873;</div>
+                <div>
+                    <div class="page-title">TurtleBot4-Lite Navigation</div>
+                    <div class="page-subtitle">Reinforcement Learning Experiment Results</div>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="nav-dropdown">
+                    <a href="../../index.html#ex1-results" class="nav-link">Ex1 结果</a>
+                    <div class="dropdown-content">
+                        <a href="../mapsize_4/mlp.html">Map Size 4</a>
+                        <a href="../mapsize_6/mlp.html">Map Size 6</a>
+                        <a href="../mapsize_10/mlp.html">Map Size 10</a>
+                    </div>
+                </div>
+                <a href="../../index.html#ex2-results" class="nav-link">Ex2 结果</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 主内容区 ========== -->
+    <main class="main-content">
+
+        <!-- ===== Ex1 结果 ===== -->
+        <section class="section" id="ex1-results">
+            <div class="section-header">
+                <span class="section-number">1</span>
+                <div>
+                    <h1 class="section-title">Experiment 1 — 子目标预测</h1>
+                    <span class="section-subtitle">不同模型在不同地图尺寸下的预测性能对比</span>
+                </div>
+            </div>
+
+            <!-- 指标说明 -->
+            <div class="metrics-legend">
+                <span class="metric-tag"><span class="metric-abbr">MSE</span> 均方误差</span>
+                <span class="metric-tag"><span class="metric-abbr">RMSE</span> 均方根误差</span>
+                <span class="metric-tag"><span class="metric-abbr">MAE</span> 平均绝对误差</span>
+                <span class="metric-tag"><span class="metric-abbr">R²</span> 决定系数</span>
+                <span class="metric-tag"><span class="metric-abbr">MDE</span> 最大距离误差</span>
+                <span class="metric-tag"><span class="metric-abbr">Median DE</span> 中位距离误差</span>
+                <span class="metric-tag"><span class="metric-abbr">In-Bounds</span> 可通行区域比例</span>
+                <span class="metric-tag"><span class="metric-abbr">Valid SG</span> 有效子目标比例</span>
+                <span class="metric-tag"><span class="metric-abbr">Obs Hit</span> 障碍物碰撞率</span>
+                <span class="metric-tag"><span class="metric-abbr">Reach Seg</span> 可到达段比例</span>
+                <span class="metric-tag"><span class="metric-abbr">Progress</span> 进度比例</span>
+                <span class="metric-tag"><span class="metric-abbr">Mean Prog</span> 平均进度</span>
+            </div>
+
+            <div class="sub-nav" style="margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; font-size: 0.85rem;">
+                <a href="../../index.html" style="color: var(--accent); text-decoration: none; font-weight: 600;">&larr; Back to Index</a>
+                <span style="color: var(--text-muted);">|</span>
+                <span style="color: var(--text-primary); font-weight: 600;">Map Size 10</span>
+                <span style="color: var(--text-muted);">|</span>
+                <span style="color: var(--accent); font-weight: 600;">LSTM</span>
+            </div>
+            <div class="model-switcher" style="margin-bottom: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;">
+                <span style="font-size: 0.78rem; color: var(--text-muted); margin-right: 0.2rem;">Models:</span>
+                <a href="mlp.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">MLP</a>
+                <a href="tabm.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">TabM</a>
+                <span style="background: var(--accent); color: #fff; padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; font-weight: 600;">LSTM</span>
+                <a href="transformer.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">Transformer</a>
+                <a href="xgboost.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">XGBoost</a>
+                <a href="catboost.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">CatBoost</a>
+                <a href="summary.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">Summary</a>
+            </div>
+            <div class="size-switcher" style="margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;">
+                <span style="font-size: 0.78rem; color: var(--text-muted); margin-right: 0.2rem;">Map Size:</span>
+                <a href="../mapsize_4/lstm.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">Map Size 4</a>
+                <a href="../mapsize_6/lstm.html" style="background: var(--bg-card); color: var(--text-secondary); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; text-decoration: none; border: 1px solid var(--border-light);">Map Size 6</a>
+                <span style="background: var(--success); color: #fff; padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; font-weight: 600;">Map Size 10</span>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        Map Size 10
+                        <span class="card-badge badge-green">LSTM</span>
+                    </h2>
+                    <span style="font-size:0.8rem;color:var(--text-muted)">5 seeds evaluated</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table auto-highlight">
+                        <thead>
+                            <tr>
+                                <th>Seed</th>
+                                <th>MSE ↓</th>
+                                <th>RMSE ↓</th>
+                                <th>MAE ↓</th>
+                                <th>R² ↑</th>
+                                <th>MDE ↓</th>
+                                <th>Median DE ↓</th>
+                                <th>In-Bounds ↑</th>
+                                <th>Valid SG ↑</th>
+                                <th>Obs Hit ↓</th>
+                                <th>Reach Seg ↑</th>
+                                <th>Progress ↑</th>
+                                <th>Mean Prog ↑</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0</td>
+                                <td>0.0019</td>
+                                <td>0.0439</td>
+                                <td>0.0187</td>
+                                <td>0.9983</td>
+                                <td>0.0287</td>
+                                <td>0.0120</td>
+                                <td>1.0000</td>
+                                <td>0.9978</td>
+                                <td>0.0005</td>
+                                <td>0.9989</td>
+                                <td>1.0000</td>
+                                <td>1.6526</td>
+                            </tr>
+                            <tr>
+                                <td>100</td>
+                                <td>0.0162</td>
+                                <td>0.1272</td>
+                                <td>0.0555</td>
+                                <td>0.9966</td>
+                                <td>0.0867</td>
+                                <td>0.0590</td>
+                                <td>1.0000</td>
+                                <td>0.9507</td>
+                                <td>0.0032</td>
+                                <td>0.9921</td>
+                                <td>0.9997</td>
+                                <td>1.8286</td>
+                            </tr>
+                            <tr>
+                                <td>1013</td>
+                                <td>0.0238</td>
+                                <td>0.1543</td>
+                                <td>0.0695</td>
+                                <td>0.9949</td>
+                                <td>0.1082</td>
+                                <td>0.0708</td>
+                                <td>1.0000</td>
+                                <td>0.9201</td>
+                                <td>0.0069</td>
+                                <td>0.9851</td>
+                                <td>0.9995</td>
+                                <td>1.8359</td>
+                            </tr>
+                            <tr>
+                                <td>2026</td>
+                                <td>0.0187</td>
+                                <td>0.1368</td>
+                                <td>0.0621</td>
+                                <td>0.9960</td>
+                                <td>0.0971</td>
+                                <td>0.0656</td>
+                                <td>1.0000</td>
+                                <td>0.9286</td>
+                                <td>0.0052</td>
+                                <td>0.9874</td>
+                                <td>0.9990</td>
+                                <td>1.8332</td>
+                            </tr>
+                            <tr>
+                                <td>42</td>
+                                <td>0.0192</td>
+                                <td>0.1386</td>
+                                <td>0.0626</td>
+                                <td>0.9959</td>
+                                <td>0.0978</td>
+                                <td>0.0639</td>
+                                <td>1.0000</td>
+                                <td>0.9301</td>
+                                <td>0.0050</td>
+                                <td>0.9874</td>
+                                <td>0.9994</td>
+                                <td>1.8221</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        Map Size 10
+                        <span class="card-badge badge-green">LSTM</span>
+                    </h2>
+                    <span style="font-size:0.8rem;color:var(--text-muted)">Summary Statistics</span>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table stat-table">
+                        <thead>
+                            <tr>
+                                <th>Stat</th>
+                                <th>MSE ↓</th>
+                                <th>RMSE ↓</th>
+                                <th>MAE ↓</th>
+                                <th>R² ↑</th>
+                                <th>MDE ↓</th>
+                                <th>Median DE ↓</th>
+                                <th>In-Bounds ↑</th>
+                                <th>Valid SG ↑</th>
+                                <th>Obs Hit ↓</th>
+                                <th>Reach Seg ↑</th>
+                                <th>Progress ↑</th>
+                                <th>Mean Prog ↑</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mean</td>
+                                <td>0.0160</td>
+                                <td>0.1201</td>
+                                <td>0.0537</td>
+                                <td>0.9963</td>
+                                <td>0.0837</td>
+                                <td>0.0543</td>
+                                <td>1.0000</td>
+                                <td>0.9455</td>
+                                <td>0.0042</td>
+                                <td>0.9902</td>
+                                <td>0.9995</td>
+                                <td>1.7945</td>
+                            </tr>
+                            <tr>
+                                <td>Std</td>
+                                <td>0.0074</td>
+                                <td>0.0391</td>
+                                <td>0.0181</td>
+                                <td>0.0011</td>
+                                <td>0.0283</td>
+                                <td>0.0215</td>
+                                <td>0.0000</td>
+                                <td>0.0280</td>
+                                <td>0.0022</td>
+                                <td>0.0049</td>
+                                <td>0.0003</td>
+                                <td>0.0711</td>
+                            </tr>
+                            <tr>
+                                <td>Min</td>
+                                <td>0.0019</td>
+                                <td>0.0439</td>
+                                <td>0.0187</td>
+                                <td>0.9949</td>
+                                <td>0.0287</td>
+                                <td>0.0120</td>
+                                <td>1.0000</td>
+                                <td>0.9201</td>
+                                <td>0.0005</td>
+                                <td>0.9851</td>
+                                <td>0.9990</td>
+                                <td>1.6526</td>
+                            </tr>
+                            <tr>
+                                <td>Max</td>
+                                <td>0.0238</td>
+                                <td>0.1543</td>
+                                <td>0.0695</td>
+                                <td>0.9983</td>
+                                <td>0.1082</td>
+                                <td>0.0708</td>
+                                <td>1.0000</td>
+                                <td>0.9978</td>
+                                <td>0.0069</td>
+                                <td>0.9989</td>
+                                <td>1.0000</td>
+                                <td>1.8359</td>
+                            </tr>
+                            <tr style="font-weight:600;background:var(--accent-light);">
+                                <td>Mean ± Std</td>
+                                <td>0.0160 ± 0.0074</td>
+                                <td>0.1201 ± 0.0391</td>
+                                <td>0.0537 ± 0.0181</td>
+                                <td>0.9963 ± 0.0011</td>
+                                <td>0.0837 ± 0.0283</td>
+                                <td>0.0543 ± 0.0215</td>
+                                <td>1.0000 ± 0.0000</td>
+                                <td>0.9455 ± 0.0280</td>
+                                <td>0.0042 ± 0.0022</td>
+                                <td>0.9902 ± 0.0049</td>
+                                <td>0.9995 ± 0.0003</td>
+                                <td>1.7945 ± 0.0711</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ========== 页脚 ========== -->
+    <footer class="page-footer">
+        <p>TurtleBot4-Lite Navigation &middot; Robotics RL &middot; Experiment Results</p>
+        <p style="margin-top:4px;">Generated on August 4, 2026</p>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

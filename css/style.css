@@ -224,6 +224,11 @@ body {
     color: var(--warning);
 }
 
+.badge-teal {
+    background: #e0f5f0;
+    color: #0d8c6d;
+}
+
 /* ===== 表格容器 ===== */
 .table-wrapper {
     overflow-x: auto;
@@ -336,6 +341,33 @@ body {
 
 .val-low {
     color: var(--danger);
+    font-weight: 600;
+}
+
+/* ===== 子表标题 ===== */
+.sub-table-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.02em;
+}
+
+/* 统计汇总表（mean ± std） */
+.stat-table thead th {
+    background: #f0f4f8;
+    font-size: 0.7rem;
+}
+
+.stat-table tbody td {
+    font-size: 0.78rem;
+    text-align: center;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.stat-table tbody td:first-child {
+    color: var(--text-secondary);
     font-weight: 600;
 }
 
@@ -546,4 +578,79 @@ body {
 
 .compare-highlight td {
     font-weight: 600 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Sub-page nav styles */
+.model-switcher a:hover,
+.size-switcher a:hover {
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+    background: var(--accent-light) !important;
+}
+
+/* Nav dropdown for Ex1 */
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    min-width: 160px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    z-index: 1000;
+    padding: 0.4rem 0;
+}
+
+.nav-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+}
+
+.dropdown-content a:hover {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+/* Index card link hover */
+.index-card-link:hover {
+    border-color: var(--accent) !important;
+    box-shadow: 0 2px 12px rgba(91, 155, 213, 0.15) !important;
+    transform: translateY(-2px);
+}
+
+/* Sub-page nav styles */
+.model-switcher a:hover,
+.size-switcher a:hover {
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+    background: var(--accent-light) !important;
 }

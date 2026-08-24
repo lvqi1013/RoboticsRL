@@ -68,8 +68,8 @@ class TurtleBotNavEnv(gym.Env):
         self.position_index = 0 
 
 
-        self.MAX_LINEAR_VEL = 0.7  # 降低速度，防止因速度过快刹不住车 TODO
-        self.MAX_ANGULAR_VEL = 1.9
+        self.MAX_LINEAR_VEL = 0.6  # 降低速度，防止因速度过快刹不住车 TODO
+        self.MAX_ANGULAR_VEL = 1.2
 
 
         # LiDAR & Goal configuration
@@ -794,9 +794,10 @@ class TurtleBotNavEnv(gym.Env):
 
             # === 步数惩罚 ===
             step_penalty = 0.25
+            idle_penalty = 0.2 if self.prev_linear_vel < 0.03 else 0.0
 
             # === 计算总奖励 ===
-            total_reward = 100 * distance_reward - step_penalty
+            total_reward = 100 * distance_reward - step_penalty - idle_penalty
 
             return total_reward
     

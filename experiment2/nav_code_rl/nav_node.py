@@ -119,23 +119,22 @@ class TurtleBotRLNode(Node):
                     target_kl=0.005,  # 限制策略更新幅度，提高稳定性
                 )
             elif algorithm_name == 'SAC':
-                action_dim = float(np.prod(self.env.action_space.shape)) if hasattr(self.env.action_space, "shape") else 1.0
                 model = algorithms[algorithm_name](
                     "MlpPolicy",
                     self.env,
                     verbose=1,
                     device='auto',
                     tensorboard_log=self.tensorboard_log,
-                    learning_rate=1e-4,
-                    buffer_size=1000_000,
+                    learning_rate=3e-4,
+                    buffer_size=100_000,
                     batch_size=256,
-                    gamma=0.99,
+                    gamma=0.98,
                     tau=0.005,
                     train_freq=1,
                     gradient_steps=1,
-                    learning_starts=5000,
-                    ent_coef='auto',
-                    target_entropy=-1.5*action_dim,
+                    learning_starts=1000,
+                    ent_coef='auto_0.1',
+                    target_entropy='auto',
                     policy_kwargs=dict(
                         net_arch=[256, 256],
                         activation_fn=torch.nn.ReLU

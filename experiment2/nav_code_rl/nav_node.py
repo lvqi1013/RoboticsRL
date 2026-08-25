@@ -99,24 +99,24 @@ class TurtleBotRLNode(Node):
                     verbose=1,
                     device='auto',
                     tensorboard_log=self.tensorboard_log,
-                    learning_rate=1e-4,  
-                    n_steps=2048,  
-                    batch_size=256, 
-                    n_epochs=10,
-                    gamma=0.95,
+                    learning_rate=2e-4,  
+                    n_steps=4096,  
+                    batch_size=512, 
+                    n_epochs=5,
+                    gamma=0.995,
                     gae_lambda=0.95,
-                    clip_range=0.1,
+                    clip_range=0.2,
                     clip_range_vf=None,
                     ent_coef=0.05,
                     vf_coef=0.5,
                     max_grad_norm=0.5,
                     policy_kwargs=dict(
-                        net_arch=[dict(pi=[256, 256], vf=[256, 256])],
+                        net_arch=[dict(pi=[512, 256], vf=[512, 256])],
                         activation_fn=torch.nn.ReLU,
                         ortho_init=True,  # 使用正交初始化，提高训练稳定性
                     ),
                     normalize_advantage=True,  # 归一化优势函数，提高训练稳定性
-                    target_kl=0.005,  # 限制策略更新幅度，提高稳定性
+                    target_kl=0.02,  # 限制策略更新幅度，提高稳定性
                 )
             elif algorithm_name == 'SAC':
                 model = algorithms[algorithm_name](
@@ -127,7 +127,7 @@ class TurtleBotRLNode(Node):
                     tensorboard_log=self.tensorboard_log,
                     learning_rate=3e-4,
                     buffer_size=100_000,
-                    batch_size=256,
+                    batch_size=512,
                     gamma=0.98,
                     tau=0.005,
                     train_freq=1,
@@ -182,7 +182,6 @@ class TurtleBotRLNode(Node):
         # 计算总训练步数
         total_timesteps = self.episodes * self.timesteps
         self.get_logger().info(f"Starting training with {total_timesteps:,} total timesteps")
-        self.get_logger().info("Environment will auto-generate random start/goal positions on each reset")
 
         callbacks = [SuccessInfoCallback(tensorboard_log_dir=self.tensorboard_log, verbose=1)]
 

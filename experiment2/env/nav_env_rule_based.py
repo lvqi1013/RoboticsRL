@@ -758,11 +758,11 @@ class TurtleBotNavEnv(gym.Env):
         没有子目标特殊奖励，保持奖励函数连续平滑
         """
         if target:
-            target_reward = 100.0
+            target_reward = 250.0
             self._print_and_log(f"🎯 REWARD: Target reached! reward={target_reward:.3f}")
             return target_reward
         elif collision:
-            collision_reward = -100.0
+            collision_reward = -200.0
             self._print_and_log(f"💥 REWARD: Collision! reward={collision_reward:.3f}")
             return collision_reward
         elif not model_updated:
